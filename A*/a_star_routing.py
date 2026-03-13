@@ -36,7 +36,7 @@ stations = {
 # Step 2: Load ML Model
 # -------------------------
 
-model_path = os.path.expanduser("~/Desktop/traffic_speed_model.pkl")
+model_path = os.path.expanduser("/Users/amruth/smart_traffic_routing/models/traffic_speed_model.pkl")
 model = joblib.load(model_path)
 
 print("✅ Loaded XGBoost model for speed prediction.")

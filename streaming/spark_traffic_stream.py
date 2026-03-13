@@ -93,7 +93,7 @@ query = df_json.writeStream \
     .format("console") \
     .outputMode("append") \
     .option("truncate", "false") \
-    .option("checkpointLocation", "file:///Users/spartan/Desktop/spark-checkpoints/traffic") \
+    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/traffic") \
     .start()
 
 # Step 9: Output weather data to console
@@ -101,7 +101,7 @@ query_weather = df_weather_json.writeStream \
     .format("console") \
     .outputMode("append") \
     .option("truncate", "false") \
-    .option("checkpointLocation", "file:///Users/spartan/Desktop/spark-checkpoints/weather") \
+    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/weather") \
     .start()
 
 # Step 9: Output accident data to console
@@ -109,7 +109,7 @@ query_incident = df_incident_json.writeStream \
     .format("console") \
     .outputMode("append") \
     .option("truncate", "false") \
-    .option("checkpointLocation", "file:///Users/spartan/Desktop/spark-checkpoints/incidents") \
+    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/incidents") \
     .start()
 
 

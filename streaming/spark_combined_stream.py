@@ -130,7 +130,7 @@ query = df_output.writeStream \
     .format("console") \
     .outputMode("append") \
     .option("truncate", "false") \
-    .option("checkpointLocation", "file:///Users/spartan/Desktop/spark-checkpoints/final") \
+    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/final") \
     .start()
 
 query.awaitTermination()

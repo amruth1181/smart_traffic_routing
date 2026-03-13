@@ -128,7 +128,7 @@ final_df = final_joined.select(
 # Step 9: Write to MongoDB (✅ with correct options now)
 query = final_df.writeStream \
     .format("mongodb") \
-    .option("checkpointLocation", "file:///Users/spartan/Desktop/spark-checkpoints/mongodb") \
+    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/mongodb") \
     .option("database", "smart_traffic_db") \
     .option("collection", "traffic_weather_incidents") \
     .outputMode("append") \

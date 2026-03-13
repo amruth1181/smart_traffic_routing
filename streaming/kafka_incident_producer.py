@@ -6,7 +6,7 @@ from datetime import datetime
 from kafka import KafkaProducer
 
 # ✅ Load lat/lon from traffic file
-df = pd.read_csv('/Users/spartan/Desktop/pems_5min_cleaned_with_location.csv')
+df = pd.read_csv('/Users/amruth/smart_traffic_routing/pems_5min_cleaned_with_location.csv')
 gps_locations = df[['Lat', 'Lon']].drop_duplicates().sample(10).values.tolist()
 
 # ✅ Incident types and severity levels

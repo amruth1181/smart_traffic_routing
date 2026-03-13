@@ -5,7 +5,7 @@ from kafka import KafkaProducer
 from datetime import datetime
 
 # ✅ Load cleaned traffic data
-csv_path = '/Users/spartan/Desktop/pems_5min_cleaned_with_location.csv'
+csv_path = '/Users/amruth/smart_traffic_routing/pems_5min_cleaned_with_location.csv'
 df = pd.read_csv(csv_path)
 
 # ✅ Setup Kafka producer

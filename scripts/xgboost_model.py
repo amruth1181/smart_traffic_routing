@@ -4,7 +4,7 @@
 
 import pandas as pd
 import numpy as np
-from pymongo import MongoClient
+
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
@@ -17,15 +17,7 @@ import joblib
 # Step 1: Load Data from MongoDB
 # -------------------------
 
-client = MongoClient("mongodb://127.0.0.1:27017/")
-db = client.smart_traffic_db
-collection = db.traffic_weather_incidents
-data = list(collection.find())
-df = pd.DataFrame(data)
-
-# Drop MongoDB internal ID column
-if '_id' in df.columns:
-    df.drop(columns=['_id'], inplace=True)
+df = pd.read_csv('/Users/amruth/smart_traffic_routing/traffic_weather_incidents.csv')
 
 # Fill missing values with 0
 df.fillna(0, inplace=True)
@@ -105,7 +97,7 @@ xgb.plot_importance(model, importance_type='gain', show_values=False)
 plt.title("Feature Importance (by Gain)")
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+# plt.show()
 
 # -------------------------
 # Step 8: Actual vs Predicted Scatter Plot
@@ -119,8 +111,8 @@ plt.ylabel("Predicted Speed")
 plt.title("XGBoost: Actual vs Predicted Traffic Speeds")
 plt.grid(True)
 plt.tight_layout()
-plt.show()
+# plt.show()
 
 # Save model
-joblib.dump(model, "traffic_speed_model.pkl")
+joblib.dump(model, "/Users/amruth/smart_traffic_routing/models/traffic_speed_model.pkl")
 print("\n✅ XGBoost model saved as 'traffic_speed_model.pkl'")
