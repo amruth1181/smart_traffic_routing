@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: congestion_by_region
+    description: "Average speed / flow / incident counts per region + freeway, with a congestion flag."
+    columns:
+      - name: region
+        tests:
+          - not_null
+      - name: avg_speed_kmh
+        description: "Mean recorded speed; core KPI."
+        tests:
+          - not_null
+      - name: is_congested
+        tests:
+          - not_null
+
+  - name: hourly_traffic_summary
+    description: "Hourly time-series of traffic conditions per region."
+    columns:
+      - name: traffic_hour
+        tests:
+          - not_null
+      - name: region
+        tests:
+          - not_null
+      - name: avg_speed_kmh
+        tests:
+          - not_null
