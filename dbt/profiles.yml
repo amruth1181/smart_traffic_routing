@@ -1,0 +1,25 @@
+# dbt connection profile. Because DBT_PROFILES_DIR=./dbt (see .env),
+# dbt reads THIS file. All secrets come from environment variables, so
+# nothing sensitive is committed and switching to a cloud warehouse is
+# just a matter of changing the env vars (or adding a new `type:` block).
+smart_traffic:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('WAREHOUSE_HOST', 'localhost') }}"
+      port: "{{ env_var('WAREHOUSE_PORT', '5432') | int }}"
+      user: "{{ env_var('WAREHOUSE_USER', 'traffic') }}"
+      password: "{{ env_var('WAREHOUSE_PASSWORD', 'traffic') }}"
+      dbname: "{{ env_var('WAREHOUSE_DB', 'traffic_warehouse') }}"
+      schema: analytics
+      threads: 4
+
+    # ---- Example cloud target (BigQuery). Uncomment + `dbt run -t prod`. ----
+    # prod:
+    #   type: bigquery
+    #   method: service-account
+    #   project: "{{ env_var('GCP_PROJECT') }}"
+    #   dataset: traffic_analytics
+    #   keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+    #   threads: 4
