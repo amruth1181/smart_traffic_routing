@@ -2,6 +2,7 @@
 # XGBoost Model for Smart Traffic Prediction
 # -----------------------------------------
 
+import os
 import pandas as pd
 import numpy as np
 
@@ -17,7 +18,8 @@ import joblib
 # Step 1: Load Data from MongoDB
 # -------------------------
 
-df = pd.read_csv('/Users/amruth/smart_traffic_routing/traffic_weather_incidents.csv')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+df = pd.read_csv(os.path.join(BASE_DIR, 'traffic_weather_incidents.csv'))
 
 # Fill missing values with 0
 df.fillna(0, inplace=True)
@@ -114,5 +116,6 @@ plt.tight_layout()
 # plt.show()
 
 # Save model
-joblib.dump(model, "/Users/amruth/smart_traffic_routing/models/traffic_speed_model.pkl")
+os.makedirs(os.path.join(BASE_DIR, "models"), exist_ok=True)
+joblib.dump(model, os.path.join(BASE_DIR, "models", "traffic_speed_model.pkl"))
 print("\n✅ XGBoost model saved as 'traffic_speed_model.pkl'")

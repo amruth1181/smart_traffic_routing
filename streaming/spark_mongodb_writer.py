@@ -1,6 +1,9 @@
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col, to_timestamp, round, expr
 from pyspark.sql.types import StructType, StructField, StringType, DoubleType, IntegerType
+
+CHECKPOINT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "spark-checkpoints")
 
 # Step 1: Create SparkSession
 spark = SparkSession.builder \
@@ -128,7 +131,7 @@ final_df = final_joined.select(
 # Step 9: Write to MongoDB (✅ with correct options now)
 query = final_df.writeStream \
     .format("mongodb") \
-    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/mongodb") \
+    .option("checkpointLocation", os.path.join(CHECKPOINT_DIR, "mongodb")) \
     .option("database", "smart_traffic_db") \
     .option("collection", "traffic_weather_incidents") \
     .outputMode("append") \

@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 import random
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 stations = [
     {"region": "San Francisco", "lat": 37.8, "lon": -122.4},
@@ -41,7 +44,7 @@ for i in range(n_rows):
         "AvgSpeed": round(random.uniform(10.0, 75.0), 1)
     })
 
-pd.DataFrame(data_pems).to_csv("/Users/amruth/smart_traffic_routing/pems_5min_cleaned_with_location.csv", index=False)
+pd.DataFrame(data_pems).to_csv(os.path.join(BASE_DIR, "pems_5min_cleaned_with_location.csv"), index=False)
 
 data_ml = []
 for i in range(n_rows):
@@ -60,4 +63,4 @@ for i in range(n_rows):
         "speed": round(random.uniform(10.0, 75.0), 1)
     })
 
-pd.DataFrame(data_ml).to_csv("/Users/amruth/smart_traffic_routing/traffic_weather_incidents.csv", index=False)
+pd.DataFrame(data_ml).to_csv(os.path.join(BASE_DIR, "traffic_weather_incidents.csv"), index=False)

@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import json
 import time
@@ -5,7 +6,8 @@ from kafka import KafkaProducer
 from datetime import datetime
 
 # ✅ Load cleaned traffic data
-csv_path = '/Users/amruth/smart_traffic_routing/pems_5min_cleaned_with_location.csv'
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+csv_path = os.path.join(BASE_DIR, 'pems_5min_cleaned_with_location.csv')
 df = pd.read_csv(csv_path)
 
 # ✅ Setup Kafka producer

@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import random
 import json
@@ -6,7 +7,8 @@ from datetime import datetime
 from kafka import KafkaProducer
 
 # ✅ Load lat/lon from traffic file
-df = pd.read_csv('/Users/amruth/smart_traffic_routing/pems_5min_cleaned_with_location.csv')
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+df = pd.read_csv(os.path.join(BASE_DIR, 'pems_5min_cleaned_with_location.csv'))
 gps_locations = df[['Lat', 'Lon']].drop_duplicates().sample(10).values.tolist()
 
 # ✅ Incident types and severity levels

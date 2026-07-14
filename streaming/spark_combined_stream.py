@@ -1,6 +1,9 @@
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col, round, to_timestamp, expr
 from pyspark.sql.types import *
+
+CHECKPOINT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "spark-checkpoints")
 
 # ✅ Create Spark session
 spark = SparkSession.builder \
@@ -130,7 +133,7 @@ query = df_output.writeStream \
     .format("console") \
     .outputMode("append") \
     .option("truncate", "false") \
-    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/final") \
+    .option("checkpointLocation", os.path.join(CHECKPOINT_DIR, "final")) \
     .start()
 
 query.awaitTermination()

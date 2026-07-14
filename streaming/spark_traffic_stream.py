@@ -1,6 +1,9 @@
+import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import from_json, col
 from pyspark.sql.types import StructType, StructField, StringType, DoubleType, IntegerType
+
+CHECKPOINT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "spark-checkpoints")
 
 # Step 1: Start Spark session
 spark = SparkSession.builder \
@@ -93,7 +96,7 @@ query = df_json.writeStream \
     .format("console") \
     .outputMode("append") \
     .option("truncate", "false") \
-    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/traffic") \
+    .option("checkpointLocation", os.path.join(CHECKPOINT_DIR, "traffic")) \
     .start()
 
 # Step 9: Output weather data to console
@@ -101,7 +104,7 @@ query_weather = df_weather_json.writeStream \
     .format("console") \
     .outputMode("append") \
     .option("truncate", "false") \
-    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/weather") \
+    .option("checkpointLocation", os.path.join(CHECKPOINT_DIR, "weather")) \
     .start()
 
 # Step 9: Output accident data to console
@@ -109,7 +112,7 @@ query_incident = df_incident_json.writeStream \
     .format("console") \
     .outputMode("append") \
     .option("truncate", "false") \
-    .option("checkpointLocation", "file:///Users/amruth/smart_traffic_routing/streaming/spark-checkpoints/incidents") \
+    .option("checkpointLocation", os.path.join(CHECKPOINT_DIR, "incidents")) \
     .start()
 
 
