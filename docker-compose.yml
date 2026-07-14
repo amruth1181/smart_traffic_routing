@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+  # -------- Streaming layer (Kafka) --------
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
     environment:
@@ -18,3 +19,20 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  # -------- Warehouse layer (Postgres) --------
+  # Acts as the analytical warehouse for dbt. Swap this for Cloud SQL /
+  # BigQuery / Snowflake in production by changing the env vars only.
+  warehouse:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: traffic
+      POSTGRES_PASSWORD: traffic
+      POSTGRES_DB: traffic_warehouse
+    volumes:
+      - warehouse_data:/var/lib/postgresql/data
+
+volumes:
+  warehouse_data:
