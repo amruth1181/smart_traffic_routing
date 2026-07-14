@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_traffic_weather_incidents
+    description: "Cleaned, typed, one-row-per-observation traffic/weather/incident data."
+    columns:
+      - name: event_time
+        description: "Observation timestamp (falls back to load time if missing)."
+        tests:
+          - not_null
+      - name: speed
+        description: "Measured / recorded speed in km/h."
+        tests:
+          - not_null
+      - name: region
+        tests:
+          - not_null
+      - name: severity
+        description: "Incident severity bucket."
+        tests:
+          - accepted_values:
+              values: ['none', 'low', 'medium', 'high']
+      - name: incident_type
+        tests:
+          - accepted_values:
+              values: ['none', 'accident', 'roadwork', 'congestion']

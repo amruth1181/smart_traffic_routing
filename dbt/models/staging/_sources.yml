@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw enriched records landed by warehouse/load_to_postgres.py"
+    schema: "{{ env_var('WAREHOUSE_RAW_SCHEMA', 'raw') }}"
+    tables:
+      - name: traffic_weather_incidents
+        description: "Traffic + weather + incident records, one row per observation."
+        # Freshness: warn if newest load is >12h old, error if >24h old.
+        loaded_at_field: _loaded_at
+        freshness:
+          warn_after: {count: 12, period: hour}
+          error_after: {count: 24, period: hour}
