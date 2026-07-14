@@ -1,0 +1,28 @@
+# ---- Core (data generation, streaming, ML, dashboard) ----
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+matplotlib
+seaborn
+networkx
+geopy
+streamlit
+kafka-python-ng
+pyspark
+pymongo
+requests
+
+# ---- Warehouse / ELT layer ----
+sqlalchemy
+psycopg2-binary
+python-dotenv
+
+# ---- Transformation + tests ----
+dbt-postgres
+
+# ---- Orchestration ----
+# Airflow is heavy and version-sensitive; install it in its own environment:
+#   pip install "apache-airflow==2.9.*" \
+#     --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.9.3/constraints-3.11.txt"
